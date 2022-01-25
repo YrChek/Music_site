@@ -1,4 +1,4 @@
-create table if not exists Сотрудники (
-	Имя text unique not null,
-	Отдел text not null,
-	Начальник text references Сотрудники (Имя));
+create table if not exists РЎРѕС‚СЂСѓРґРЅРёРєРё (
+	РРјСЏ text unique not null,
+	РћС‚РґРµР» text not null,
+	РќР°С‡Р°Р»СЊРЅРёРє text references РЎРѕС‚СЂСѓРґРЅРёРєРё (РРјСЏ));

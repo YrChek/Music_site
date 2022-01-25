@@ -1,41 +1,41 @@
-create table if not exists Жанр (
+create table if not exists Р–Р°РЅСЂ (
 	ID serial primary key,
-	Название text unique);
+	РќР°Р·РІР°РЅРёРµ text unique);
 
-create table if not exists Исполнитель (
+create table if not exists РСЃРїРѕР»РЅРёС‚РµР»СЊ (
 	ID serial primary key,
-	Имя text unique);
+	РРјСЏ text unique);
 
-create table if not exists Альбом (
+create table if not exists РђР»СЊР±РѕРј (
 	ID serial primary key,
-	Название text not null unique,
-	Год_выхода integer not null);
+	РќР°Р·РІР°РЅРёРµ text not null unique,
+	Р“РѕРґ_РІС‹С…РѕРґР° integer not null);
 
-create table if not exists Трек (
+create table if not exists РўСЂРµРє (
 	ID serial unique,
-	Название text not null,
-	Исполнитель text references Исполнитель (Имя),
-	Длительность integer not null,
-	Альбом text references Альбом (Название),
-	constraint pk primary key (Название, Исполнитель));
+	РќР°Р·РІР°РЅРёРµ text not null,
+	РСЃРїРѕР»РЅРёС‚РµР»СЊ text references РСЃРїРѕР»РЅРёС‚РµР»СЊ (РРјСЏ),
+	Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ integer not null,
+	РђР»СЊР±РѕРј text references РђР»СЊР±РѕРј (РќР°Р·РІР°РЅРёРµ),
+	constraint pk primary key (РќР°Р·РІР°РЅРёРµ, РСЃРїРѕР»РЅРёС‚РµР»СЊ));
 	
-create table if not exists Сборник (
+create table if not exists РЎР±РѕСЂРЅРёРє (
 	ID serial primary key,
-	Название text unique,
-	Год_выхода integer not null);
+	РќР°Р·РІР°РЅРёРµ text unique,
+	Р“РѕРґ_РІС‹С…РѕРґР° integer not null);
 	
-create table if not exists Жанр_Исполнитель (
+create table if not exists Р–Р°РЅСЂ_РСЃРїРѕР»РЅРёС‚РµР»СЊ (
 	ID serial primary key,
-	ID_жанра integer  references Жанр (ID),
-	ID_исполнителя integer references Исполнитель (ID));
+	ID_Р¶Р°РЅСЂР° integer  references Р–Р°РЅСЂ (ID),
+	ID_РёСЃРїРѕР»РЅРёС‚РµР»СЏ integer references РСЃРїРѕР»РЅРёС‚РµР»СЊ (ID));
 
-create table if not exists Исполнитель_Альбом (
+create table if not exists РСЃРїРѕР»РЅРёС‚РµР»СЊ_РђР»СЊР±РѕРј (
 	ID serial primary key,
-	ID_исполнителя integer  references Исполнитель (ID),
-	ID_альбома integer references Альбом (ID));
+	ID_РёСЃРїРѕР»РЅРёС‚РµР»СЏ integer  references РСЃРїРѕР»РЅРёС‚РµР»СЊ (ID),
+	ID_Р°Р»СЊР±РѕРјР° integer references РђР»СЊР±РѕРј (ID));
 
-create table if not exists Сборник_Трек (
+create table if not exists РЎР±РѕСЂРЅРёРє_РўСЂРµРє (
 	ID serial primary key,
-	ID_сборника integer  references Сборник (ID),
-	ID_трека integer references Трек (ID));
+	ID_СЃР±РѕСЂРЅРёРєР° integer  references РЎР±РѕСЂРЅРёРє (ID),
+	ID_С‚СЂРµРєР° integer references РўСЂРµРє (ID));
 	
