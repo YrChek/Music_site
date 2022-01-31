@@ -12,12 +12,10 @@ create table if not exists Альбом (
 	Год_выхода integer not null);
 
 create table if not exists Трек (
-	ID serial unique,
+	ID serial primary key,
 	Название text not null,
-	Исполнитель text references Исполнитель (Имя),
 	Длительность integer not null,
-	Альбом text references Альбом (Название),
-	constraint pk primary key (Название, Исполнитель));
+	ID_альбома integer references Альбом (ID));
 	
 create table if not exists Сборник (
 	ID serial primary key,
