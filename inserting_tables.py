@@ -11,7 +11,7 @@ total_list = [
      [['2500 GOLDEN ROCK HITS', 2019], ['НЕМАЛЕНЬКИЙ СБОРНИК НАШЕГО РОКА (ВЕРСИЯ 2)', 2019]]],
     ['Полковнику никто не пишет', 'БИ-2', 'Русский Рок', 291, 'Сверим сердца', 2021,
      [['20 ВЕК РУССКОГО РОКА VOL.1', 2021]]],
-    ['Демобилизация', 'Сектор Газа', 'Панк-Рок', 234, 'Восставший из Ада', 2000,
+    ['Демобилизация', 'Сектор Газа', 'Русский Рок', 234, 'Восставший из Ада', 2000,
      [['СЕКТОР ГАЗА - ЛУЧШЕЕ', 2018], ['ПО ВОЛНЕ МОЕЙ ПАМЯТИ 2 ТОМ 32', 2019]]],
     ['Мой сон', 'Легион', 'Русский Рок', 248, 'Маятник времен', 2003,
      [['ЛЕГЕНДЫ НАШЕГО РОКА', 2015]]],
@@ -36,13 +36,15 @@ total_list = [
     ['Я куплю тебе дом', 'Лесоповал', 'Русский Шансон', 256, 'Я куплю тебе дом', 1991,
      [['ЗВЕЗДЫ ШАНСОНА. ЛУЧШЕЕ. ТОМ 01. ЧАСТЬ 3', 2018]]],
     ['Плакала', 'Kazka', 'Поп', 225, 'Карма 2018', 2018,
-     [['UKRAINIAN HITS VOL5 (ROMANTIC)', 2019]]]
+     [['UKRAINIAN HITS VOL5 (ROMANTIC)', 2019]]],
+    ['Мишель', 'Чайф', 'Русский Рок', 291, 'Слова На Бумаге', 2019, []]
 ]
 
 
 def insert_author(my_list):
     """Добавление в таблицу Исполнитель"""
     author_list = []
+    print_str = 'Записи в таблице "Исполнитель" актуальны'
     res = connection.execute("""SELECT Имя FROM Исполнитель;""").fetchall()
     for author in res:
         author_list += author
@@ -52,12 +54,14 @@ def insert_author(my_list):
             insert = f"INSERT INTO Исполнитель (Имя)" \
                      f"VALUES('{i[1]}');"
             connection.execute(insert)
-    print('Добавлены записи в таблицу "Исполнитель"')
+            print_str = 'Добавлены записи в таблицу "Исполнитель"'
+    print(print_str)
 
 
 def insert_style(my_list):
     """Добавление в таблицу Жанр"""
     style_list = []
+    print_str = 'Записи в таблице "Жанр" актуальны'
     res = connection.execute("""SELECT Название FROM Жанр;""").fetchall()
     for style in res:
         style_list += style
@@ -67,28 +71,33 @@ def insert_style(my_list):
             insert = f"INSERT INTO Жанр (Название)" \
                      f"VALUES('{i[2]}');"
             connection.execute(insert)
-    print('Добавлены записи в таблицу "Жанр"')
+            print_str = 'Добавлены записи в таблицу "Жанр"'
+    print(print_str)
 
 
 def insert_collection(my_list):
     """Добавление в таблицу Сборник"""
     collection_list = []
+    print_str = 'Записи в таблице "Сборник" актуальны'
     res = connection.execute("""SELECT Название FROM Сборник;""").fetchall()
     for collection in res:
         collection_list += collection
     for i in my_list:
-        for k in i[-1]:
-            if k[0] not in collection_list:
-                collection_list.append(k[0])
-                insert = f"INSERT INTO Сборник (Название, Год_выхода)" \
-                         f"VALUES('{k[0]}', {k[1]});"
-                connection.execute(insert)
-    print('Добавлены записи в таблицу "Сборник"')
+        if len(i[-1]) != 0:
+            for k in i[-1]:
+                if k[0] not in collection_list:
+                    collection_list.append(k[0])
+                    insert = f"INSERT INTO Сборник (Название, Год_выхода)" \
+                             f"VALUES('{k[0]}', {k[1]});"
+                    connection.execute(insert)
+                    print_str = 'Добавлены записи в таблицу "Сборник"'
+    print(print_str)
 
 
 def insert_album(my_list):
     """Добавление в таблицу Альбом"""
     album_list = []
+    print_str = 'Записи в таблице "Альбом" актуальны'
     res = connection.execute("""SELECT Название FROM Альбом;""").fetchall()
     for album in res:
         album_list += album
@@ -98,7 +107,8 @@ def insert_album(my_list):
             insert = f"INSERT INTO Альбом (Название, Год_выхода)" \
                      f"VALUES('{i[4]}', {i[5]});"
             connection.execute(insert)
-    print('Добавлены записи в таблицу "Альбом"')
+            print_str = 'Добавлены записи в таблицу "Альбом"'
+    print(print_str)
 
 
 def insert_track(my_list):
@@ -200,11 +210,11 @@ def insert_author_album(my_list):
         print('Записи в таблице "Исполнитель_Альбом" актуальны')
 
 
-insert_author(total_list)
+# insert_author(total_list)
 insert_style(total_list)
-insert_collection(total_list)
-insert_album(total_list)
-insert_track(total_list)
-insert_collection_track(total_list)
-insert_style_author(total_list)
-insert_author_album(total_list)
+# insert_collection(total_list)
+# insert_album(total_list)
+# insert_track(total_list)
+# insert_collection_track(total_list)
+# insert_style_author(total_list)
+# insert_author_album(total_list)
